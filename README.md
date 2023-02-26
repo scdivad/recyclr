@@ -1,5 +1,5 @@
 # recyclr
-A app to track the number of recycle bins and displays the distribution of the recycle bins around us.
+A app to choose the most optimal locations for building a recycling center based upon recycle bin locations and usage. It tracks number of recycle bins and displays the distribution of the recycle bins around us.
 
 Clone the repository - 
 
