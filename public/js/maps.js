@@ -200,7 +200,7 @@ function initMap() {
         points.push(toCartesian(point.lat, point.lng));
     }
     const r = 2;
-    let centers = do_circles(1, points, r);
+    let centers = do_circles(4, points, r);
     let center_lat_lng = [];
     for (let center of centers) {
         // convert cartesian coordinates back to latitude and longitude
@@ -214,17 +214,31 @@ function initMap() {
             map,
             label: 'Recycling Center' + centers.indexOf(center),
         });
-        recycling_center.setIcon('assets/img/center (1).png');
+        recycling_center.setIcon('assets/img/factory (1).png');
     }
 
     let markers = new Array(toy_lat_lng.length);
     let info_windows = new Array(toy_lat_lng.length);
+    let paths = new Array(toy_lat_lng.length);
     for (let i = 0; i < toy_lat_lng.length; i++) {
         let content = "";
         for (let center_ll of center_lat_lng) {
             let dist = getDistanceFromLatLonInKm(toy_lat_lng[i].lat, toy_lat_lng[i].lng, center_ll.lat, center_ll.lng);
             if (dist <= r) {
                 content = 'Goes to center' + center_lat_lng.indexOf(center_ll);
+                const flightPlanCoordinates = [
+                    toy_lat_lng[i],
+                    center_ll,
+                ];
+                paths[i] = new google.maps.Polyline({
+                    path: flightPlanCoordinates,
+                    geodesic: true,
+                    strokeColor: "#FF0000",
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2,
+                });
+                paths[i].setMap(map);
+                break;
             }
         }
         markers[i] = new google.maps.Marker({
@@ -232,6 +246,7 @@ function initMap() {
             map,
             label: content == "" ? 'x' : i.toString(),
         });
+        
 
         info_windows[i] = new google.maps.InfoWindow({content});
         markers[i].addListener("click", () => {
