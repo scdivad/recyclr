@@ -1,5 +1,6 @@
 let map;
 
+
 let temp_z = 0;
 // https://stackoverflow.com/a/27943
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
@@ -146,13 +147,7 @@ function do_circles(k, points, r) { // r is range in km
     return centers;
 }
 
-function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 40.1020, lng: -88.2272 },
-        zoom: 10,
-    });
-
-    // create 10 random markers that are within 50 miles of UIUC
+function do_everything(k, r) {
     const toy_lat_lng = [
         {lat: 40.091382619054095, lng: -88.20355570065745},
         {lat: 40.119465429980075, lng: -88.25631429231643},
@@ -175,6 +170,7 @@ function initMap() {
         {lat: 40.08855865725717, lng: -88.2480154176881},
         {lat: 40.137259184864476, lng: -88.20867283496352}
     ];
+    // const uiuc_lat_lng = { lat: 40.1020, lng: -88.2272 };
     // let toy_lat_lng = [];
     // for (let i = 0; i < 20; i++) {
     //     let lat = uiuc_lat_lng.lat + (Math.random() - 0.5) * 0.25;
@@ -199,8 +195,7 @@ function initMap() {
     for (let point of toy_lat_lng) {
         points.push(toCartesian(point.lat, point.lng));
     }
-    const r = 2;
-    let centers = do_circles(4, points, r);
+    let centers = do_circles(k, points, r);
     let center_lat_lng = [];
     for (let center of centers) {
         // convert cartesian coordinates back to latitude and longitude
@@ -212,7 +207,7 @@ function initMap() {
         var recycling_center = new google.maps.Marker({
             position: { lat, lng },
             map,
-            label: 'Recycling Center' + centers.indexOf(center),
+            // label: 'Recycling Center' + centers.indexOf(center),
         });
         recycling_center.setIcon('assets/img/factory (1).png');
     }
@@ -221,11 +216,11 @@ function initMap() {
     let info_windows = new Array(toy_lat_lng.length);
     let paths = new Array(toy_lat_lng.length);
     for (let i = 0; i < toy_lat_lng.length; i++) {
-        let content = "";
+        let content = "Too far from nearest Center";
         for (let center_ll of center_lat_lng) {
             let dist = getDistanceFromLatLonInKm(toy_lat_lng[i].lat, toy_lat_lng[i].lng, center_ll.lat, center_ll.lng);
             if (dist <= r) {
-                content = 'Goes to center' + center_lat_lng.indexOf(center_ll);
+                content = (Math.round(dist * 100) / 100).toString() + ' km away from nearest Center ';
                 const flightPlanCoordinates = [
                     toy_lat_lng[i],
                     center_ll,
@@ -246,7 +241,6 @@ function initMap() {
             map,
             label: content == "" ? 'x' : i.toString(),
         });
-        
         markers[i].setIcon('assets/img/recycling-bin (2).png');
 
         info_windows[i] = new google.maps.InfoWindow({content});
@@ -257,4 +251,25 @@ function initMap() {
     }
 }
 
+function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 40.1020, lng: -88.2272 },
+        zoom: 12,
+    });
+    do_everything(0,0);
+}
+
 window.initMap = initMap;
+
+function generateCenters() {
+    let k = parseInt(document.getElementById("sliderValue").innerHTML);
+    let r = parseInt(document.getElementById("sliderValue2").innerHTML);
+    
+    do_everything(k, r);
+}
+
+// var slider = new Slider("#ex10", {});
+// slider.on("slide", function(slideEvt) {
+//     $("#ex10SliderVal").text(slideEvt.value);
+// }   );
+
