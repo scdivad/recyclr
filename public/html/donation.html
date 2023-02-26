@@ -43,17 +43,17 @@
   <header id="header" class="header d-flex align-items-center">
 
     <div class="container-fluid container-xl d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="http://localhost:3000/" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
         <h1>Recyclr<span>.</span></h1>
       </a>
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="index.html#hero">Home</a></li>
-          <li><a href="index.html#about">About</a></li>
-          <li><a href="index.html#services">Services</a></li>
-          <li><a href="index.htmldonation.html">Donations</a></li>
+          <li><a href="http://localhost:3000/#hero">Home</a></li>
+          <li><a href="http://localhost:3000/#about">About</a></li>
+          <li><a href="http://localhost:3000/#services">Event Board</a></li>
+          <li><a href="http://localhost:3000/donation">Donations</a></li>
           
         </ul>
       </nav><!-- .navbar -->
@@ -77,38 +77,116 @@
           <h2>Donation</h2>
           <p>We are a platform for local communities to post events, raise money for charitable causes, and
              a map feature to optimize recycling efforts.</p>
-        </div>
+             <p> We have a donation portolio that distributes your donation across multiple credible charities that give back to the community.</p>
+            <p> Additional features include optimal mappings between recycling centers to take shortest paths to span the most area.</p>
+           <br>
 
+            <h3 style = "text-align: center;">Leaderboard for Donations</h3>
+          </div>
+        <div class="row gy-4">
+        </div>
+        <ol class="list-group list-group-numbered" style="width:100%; align-items: center;">
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto" >
+              <div class="fw-bold"> Mark Moran</div>
+       
+            </div>
+            <span class="badge bg-primary rounded-pill">$50,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Mr. Mutt</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$20,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Adam Bruner</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$15,000</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Roger Wang</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$50</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Abhinil Dutt</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$5</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Alea Patel</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$1</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Jeffrey Chen</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">$.01</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-start" style="width:50%">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">David Cheung</div>
+            </div>
+            <span class="badge bg-primary rounded-pill">-$.05</span>
+          </li>
+          <br> </br>
+        </ol>
+        
         <div class="row gy-4">
           <div class="col-lg-6">
-            <h3>Mapping System</h3>
-            <img src="assets/img/zoox_map.jpeg" class="img-fluid rounded-4 mb-4" alt="">
-            <p> We have a donation portolio that distributes your donation across multiple credible charities that give back to the community.</p>
-            <p> Additional features include optimal mappings between recycling centers to take shortest paths to span the most area.</p>
+            <h3> Donation Breakdown</h3>
+            <!-- Add a chart from this website below: chartjs.org/docs/latest/samples/other-charts/doughnut.html -->
+            <canvas id="myChart" height="40vh"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+            <script>
+              var ctx = document.getElementById('myChart').getContext('2d');
+              var myChart = new Chart(ctx, {
+                  type: 'doughnut',
+                  data: {
+                      labels: ['Trash Charity', 'Recycling Charity', 'Food Charity', 'Community', 'Educational', 'Enviornment'],
+                      datasets: [{
+                          label: 'Percentage of Donation',
+                          data: [35, 23, 4, 15, 3, 20],
+                          backgroundColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                              'rgba(54, 162, 235, 1)',
+                              'rgba(255, 206, 86, 1)',
+                              'rgba(75, 192, 192, 1)',
+                              'rgba(153, 102, 255, 1)',
+                              'rgba(255, 159, 64, 1)'
+                          ],
+                          borderWidth: 0
+                      }]
+                  },
+                  options: {
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero: true
+                              }
+                          }]
+                      }
+                  }
+              });
+            </script>
+                        
+            <br />
           </div>
           <div class="col-lg-6">
-            <!-- <div class="card">
-                <div class="card-header">
-                  Payment Information
-                </div>
-                <div class="card-body">
-                  <div class="form-group">
-                    <label for="card-number">Card Number:</label>
-                    <input type="text" id="card-number" name="card-number" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="expiration-date">Expiration Date:</label>
-                    <input type="month" id="expiration-date" name="expiration-date" required>
-                  </div>
-                  <div class="form-group">
-                    <label for="security-code">Security Code:</label>
-                    <input type="text" id="security-code" name="security-code" required>
-                  </div>
-                </div>
-                <div class="card-footer">
-                  <button type="submit" class="btn btn-primary">Pay Now</button>
-                </div>
-              </div> -->
               <div class="payment-card">
                 <div class="card-header">
                   <h2>Payment Details</h2>
@@ -249,6 +327,10 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+
+
+
+  
 
 </body>
 

@@ -247,6 +247,7 @@ function initMap() {
             label: content == "" ? 'x' : i.toString(),
         });
         
+        markers[i].setIcon('assets/img/recycling-bin (2).png');
 
         info_windows[i] = new google.maps.InfoWindow({content});
         markers[i].addListener("click", () => {

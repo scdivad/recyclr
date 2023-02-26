@@ -17,6 +17,10 @@ app.get('/error', (req, res, next) => {
     res.sendFile('404.html', {root : __dirname});
 });
 
+app.get('/donation', (req, res, next) => {
+    res.sendFile('/public/html/donation.html', {root : __dirname});
+});
+
 app.get('/manager_map', (req, res, next) => {
     res.sendFile('/public/html/map.html', {root : __dirname});
 });

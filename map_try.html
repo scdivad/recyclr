@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Google Maps API Demo</title>
+    <style>
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Google Maps API Demo</h1>
+      <p>Enter a location to search:</p>
+      <input type="text" id="location" placeholder="Enter a location...">
+      <button id="searchButton">Search</button>
+      <div id="results"></div>
+    </div>
+
+    <script>
+      function displayResults(data) {
+        const resultsContainer = document.getElementById('results');
+        resultsContainer.innerHTML = JSON.stringify(data, null, 2);
+      }
+
+      const apiKey = 'AIzaSyCeDiSxzFywppo21vSsM_4F5yuPXSPTp0w';
+      const searchButton = document.getElementById('searchButton');
+      const locationInput = document.getElementById('location');
+
+      searchButton.addEventListener('click', () => {
+        const address = locationInput.value;
+        const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${apiKey}`;
+
+        fetch(url)
+          .then(response => response.json())
+          .then(jsonData => displayResults(jsonData))
+          .catch(error => console.error(error));
+      });
+    </script>
+  </body>
+</html>
