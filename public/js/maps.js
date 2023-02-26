@@ -200,7 +200,7 @@ function initMap() {
         points.push(toCartesian(point.lat, point.lng));
     }
     const r = 2;
-    let centers = do_circles(10, points, r);
+    let centers = do_circles(1, points, r);
     let center_lat_lng = [];
     for (let center of centers) {
         // convert cartesian coordinates back to latitude and longitude
@@ -214,7 +214,7 @@ function initMap() {
             map,
             label: 'Recycling Center' + centers.indexOf(center),
         });
-        recycling_center.setIcon('center (1).png');
+        recycling_center.setIcon('assets/img/center (1).png');
     }
 
     let markers = new Array(toy_lat_lng.length);
