@@ -2,7 +2,7 @@
 
 Submission link: https://devpost.com/software/recyclr-6qvi90
 
-Chooses the most optimal locations for building a recycling center based upon recycle bin locations and usage. Logic is in /public/js/maps.js. 
+Chooses the most optimal locations for building a recycling center based upon recycle bin locations and usage. Heuristic logic: https://github.com/scdivad/recyclr/blob/main/public/js/maps.js. 
 
 Clone the repository.
 
